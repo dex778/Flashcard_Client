@@ -1,9 +1,62 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect }from 'react';
 
 import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import './Login.css'
+
+/*
+class Login extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            username: "",
+            password: ""
+        }
+    }
+
+    render() {
+        return (
+            <div>
+        <Grid>
+            <Paper elevation={10} style={paperStyle}>
+                <Grid align="center">
+                    <Avatar style={avatarStyle}><HomeIcon/></Avatar>
+                    <h2>Sign-in</h2>
+                </Grid >
+
+                <form onSubmit={handleSubmit}>
+                <TextField label='Username' placeholder='Enter username' fullWidth  onChange={(e) => setUserName(e.target.value)} name="username" value={username} />
+                <TextField label='Password' placeholder='Enter password' type='password' fullWidth  onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
+                <br />
+                <br />
+                <br />
+                <br />
+
+                <Button type='submit' color='primary' variant='contained' style={btnstyle} fullWidth  >Sign-in</Button>
+                </form>
+                <Typography>
+                <Link href="#" >
+                    Forgot Password?
+                </Link>
+                </Typography>
+                <Typography> Do you have an account?
+                <Link href="#" >
+                    Sign-up
+                </Link>
+                </Typography>
+
+            </Paper>
+        </Grid>
+
+        </div> 
+    )
+        )
+    }
+}
+
+*/
+
 
 const Login = (props) => {
 
@@ -38,7 +91,6 @@ const Login = (props) => {
 
     return (
         <div>
-        {/* <h1>Welcome to Study JavaScript</h1> */}
         <Grid>
             <Paper elevation={10} style={paperStyle}>
                 <Grid align="center">

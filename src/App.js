@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 import './App.css';
 import Authorization from '../src/components/LandingPage/Authorization';
@@ -14,62 +14,69 @@ import Home from '../src/components/LandingPage/Home'
 import{ BrowserRouter as Router, Route } from 'react-router-dom'
 import CreateFlashcard from './components/FlashCard/CreateFlashcard';
 
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      sessionToken: ''
+    }  
+  }
 
-function App() {
-  const [sessionToken, setSessionToken] = useState('');
-  
-  useEffect(() => {
+  componentDidMount() {
     if (localStorage.getItem('token')) {
-      setSessionToken(localStorage.getItem('token'))
-    }
-  }, [])
-  
-  const updateToken = (newToken) => {
-    localStorage.setItem('token', newToken)
-    setSessionToken(newToken);
-    console.log(sessionToken);
+      this.setState((localStorage.getItem('token')))
   }
-  const Logout = () => {
-    localStorage.clear();
-    setSessionToken('')
+  }
+    updateToken = (newToken) => {
+    localStorage.setItem('token', JSON.stringify(newToken));
+    this.setState(newToken);
+    // console.log(sessionToken);
   }
 
-  return (
-    <div className="page-container">
+    Logout = () => {
+    localStorage.clear();
+    this.setState({
+      sessionToken: '',
+    }
+    );
+  }
+
+
+  render() {
+    return(
+      <div className="page-container">
       <div className="content-wrap">
-      <Navigation logout={Logout}/>
+      <Navigation logout={this.Logout}/>
 
       <Router>
-          {sessionToken === localStorage.getItem('token') ? (
+          {this.state.sessionToken === localStorage.getItem('token') ? (
             <>
               <Route exact path="/" component={Home} />
-            {<Route exact path='/flashcards' render={(props) => (<Flashcards {...props} sessionToken={sessionToken} />
+            {<Route exact path='/flashcards' render={(props) => (<Flashcards {...props} sessionToken={this.state.sessionToken} />
               )}/>}
               
-              {<Route exact path='/flashcardset' render={(props) => (<FlashcardSet {...props} sessionToken={sessionToken} />
+              {<Route exact path='/flashcardset' render={(props) => (<FlashcardSet {...props} sessionToken={this.state.sessionToken} />
               )}/>}
 
-               {<Route exact path='/createdflashcard' render={(props) => (<CreateFlashcard {...props} sessionToken={sessionToken} />
+               {<Route exact path='/createdflashcard' render={(props) => (<CreateFlashcard {...props} sessionToken={this.state.sessionToken} />
               )}/>}
               
-
-              {/* <Route exact path='/recipeTable' component={RecipeTable} /> */}
             </>
-          ) : <Authorization updateToken={updateToken} />}
+          ) : <Authorization updateToken={this.updateToken} />}
         </Router>
-
-      {/* <Route  exact path="/login" component={Login} />
-      <Route  exact path="/signup" component={SignUp} /> */}
-
-      {/* <Route exact path="/flashcards" component={Flashcards} />
-      <Route exact path="/flashcardset" component={FlashcardSet} />
-      <Route exact path="/landingpage" component={LandingPage} /> */}
 
       </div>
     <Footer />
     </div>
-  );
+    )
+  }
+
 }
 
 export default App;
+
+
+
+
+
 
