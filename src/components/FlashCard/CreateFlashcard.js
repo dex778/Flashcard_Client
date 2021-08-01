@@ -42,8 +42,6 @@ class CreateFlashcard extends React.Component {
             <button onClick={this.handleClick}>Delete</button>
             </div>
             
-
-
             </div>
   
           <div style={backCard}>

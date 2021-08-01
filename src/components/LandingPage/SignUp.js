@@ -6,6 +6,70 @@ import Checkbox from '@material-ui/core/Checkbox';
 var passwordValidator = require('password-validator');
 
 
+/*
+class Signup extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            password: ''
+        }
+
+        let handleSubmit = (event) => {
+        event.preventDefault();
+        console.log(username, password);
+
+        fetch(`http://localhost:8000/register`, {
+            method: 'POST',
+            body:JSON.stringify({
+                    username: username, 
+                    password: password
+            }),
+            headers: new Headers({
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            })
+        }).then(
+            (response) => response.json()
+        ).then((data) => {
+            this.props.updateToken(data.this.sessionToken)
+            console.log(data.sessionToken)
+        })
+    }
+
+}
+    render(){
+        return (
+            <Grid >
+            <Paper elevation={20} style={paperStyle} >
+                <Grid align='center'>
+                    <Avatar style={avatarStyle}>
+                        <AddCircleOutlineOutlinedIcon />
+                    </Avatar>
+                    <h2 style={headerStyle}>Sign Up</h2>
+                    <Typography variant='caption' gutterBottom>Please fill this form to create an account !</Typography>
+                </Grid>
+                
+                <form onSubmit={this.handleSubmit}>
+                    <TextField fullWidth label='Username'  placeholder="Enter your name" onChange={(e) => setUsername(e.target.value)} />
+                    <TextField fullWidth label='Password' pattern=".{8,}" placeholder="Enter password" onChange={(e) => (schema.validate(setPassword(e.target.value))) }/>
+                    
+                    <FormControlLabel
+                        control={<Checkbox name="checkedA" />}
+                        label="I accept the terms and conditions."
+                    />
+                    <br />
+                    <br />
+                    <Button fullWidth type='submit' variant='contained' color='primary'>Sign up</Button>
+                </form>
+            </Paper>
+        </Grid>
+        )
+    }
+}
+
+*/
+
 const Signup = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

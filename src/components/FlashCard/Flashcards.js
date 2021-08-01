@@ -7,7 +7,73 @@ import QueueIcon from '@material-ui/icons/Queue';
 import CreateFlashcard from './CreateFlashcard';
 
 
+/*
+class Flashcards extends React.Component {
+    constructor(props){
+        super(props)
+        this.state = {
+            word: null,
+            definition: null
+        }
+    }
+    
+    handleSubmit = (e) => {
+        e.preventDefault();
+        fetch(`http://localhost:8000/card/create`, {
+        method: 'POST',
+        body: JSON.stringify({ 
+            word: word, 
+            definition: definition,   
+        }),
+        headers: new Headers ({
+            'Content-Type' : 'application/json',
+            'Authorization' : props.sessionToken,
+            'Access-Control-Allow-Origin': '*'   
+        }),
+        
+    })
+    .then((response) => response.json())
+    .then(data => {
+        console.log(data)
+        setWord('');
+        setDefinition('');
 
+        })
+    .catch((err) => {
+        console.log(err, 'Flashcard Not Created')
+    })
+    }
+
+    render(){
+        return (
+            <Grid>
+            <Paper elevation={20} style={paperStyle}>
+                <Grid align='center'>
+                    <Avatar style={avatarStyle}>
+                        <QueueIcon />
+                    </Avatar>
+                    <h2 style={headerStyle}>Create Flashcard</h2>
+                </Grid>
+                    <br />
+                <form onSubmit={this.handleSubmit} noValidate>
+                    <TextField fullWidth variant='filled' label='Word' placeholder="Enter your Word" value={word} onChange={(e) => setWord(e.target.value)} required />
+                    <br />
+                    <br />
+                    <TextField fullWidth variant='filled' label='Definition' placeholder="Enter your Definition" value={definition} onChange={(e) => setDefinition(e.target.value)} required/>
+                    
+                    <br />
+                    <br />
+                    <Button type='submit' variant='contained' color='primary' >Create</Button>
+                </form>
+            </Paper>
+        </Grid>
+
+        )
+    }
+}
+
+
+*/
 
 const Flashcards = (props) => {
     const [word, setWord] = useState('')
@@ -45,13 +111,6 @@ const Flashcards = (props) => {
     })
     }
 
-    // useEffect(() => {
-        
-    //     return (
-    //         <CreateFlashcard />
-    //     )
-    // })
-
     return (
         <Grid>
             <Paper elevation={20} style={paperStyle}>
@@ -81,33 +140,5 @@ const Flashcards = (props) => {
 
 export default Flashcards;
 
-{/* <div>
-        <h1 className="title">Welcome to your Flashcards</h1>
-        <div className="input">
-        <Form className="form">
-            <Col xs={5}>
-            <Form.Group className="mb-1" >
-                <Form.Label>Word</Form.Label>
-                <Form.Control  placeholder="Enter Word" />
-                <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-                </Form.Text>
-            </Form.Group>
-            </Col>
 
-            <Col xs={5}>   
-            <Form.Group className="mb-1" controlId="formBasicPassword">
-                <Form.Label> Definition</Form.Label>
-                <Form.Control  placeholder="Definition" />
-            </Form.Group>
-            <Form.Group className="mb-1" controlId="formBasicCheckbox">
-            </Form.Group>
-            </Col>
-
-            <Button variant="primary" type="submit">
-                Submit
-            </Button>
-        </Form>
-        </div>
-        </div> */}
 
