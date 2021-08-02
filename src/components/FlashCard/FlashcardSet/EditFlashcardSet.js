@@ -13,7 +13,8 @@ class EditFlashcardSet extends React.Component {
     constructor(props){
         super(props)
         this.state = {
-            deckName: '',
+            word: '',
+            definition:'',
             isSubmitting: false,
             isEditing: false,
             currentId: 0,
@@ -29,7 +30,8 @@ class EditFlashcardSet extends React.Component {
         this.setState({
             isEditing: true,
             currentId: card.id,
-            deckName: card.deckName,
+            word: card.word,
+            definition:card.definition
         })
     }
 
@@ -80,13 +82,14 @@ class EditFlashcardSet extends React.Component {
         e.preventDefault();
         const { setId } = this.props.match.params
         this.setState({isSubmitting: true});
-        const URL = this.state.isEditing ? `http://localhost:8000/set/update/${this.state.currentId}`: 'http://localhost:8000/set/create';
+        const URL = this.state.isEditing ? `http://localhost:8000/card/update/${this.state.currentId}`: 'http://localhost:8000/card/create';
         const method = this.state.isEditing ? 'PUT' : 'POST'
 
         fetch(`${URL}`, {
         method: method,
         body: JSON.stringify({ 
-            deckName: this.state.deckName, 
+            word: this.state.word, 
+            definition: this.state.definition, 
             setId: setId   
         }),
         headers: new Headers ({
@@ -99,7 +102,8 @@ class EditFlashcardSet extends React.Component {
     .then(data => {
         console.log(data)
         this.setState({
-            deckName: '',
+            word: '',
+            definition:'',
             isEditing: false,
             currentId: 0
         });
@@ -129,7 +133,7 @@ class EditFlashcardSet extends React.Component {
                 </Grid>
                     <br />
                 <form onSubmit={this.handleSubmit} noValidate>
-                    <TextField fullWidth variant='filled' label='Word' placeholder="Enter your Word" value={this.state.deckName} onChange={(e) => this.setState({ deckName: e.target.value })} required />
+                    <TextField fullWidth variant='filled' label='Word' placeholder="Enter your Word" value={this.state.word} onChange={(e) => this.setState({ word: e.target.value })} required />
                     <br />
                     <br />
                     <TextField fullWidth variant='filled' label='Definition' placeholder="Enter your Definition" value={this.state.definition} onChange={(e) => this.setState({ definition: e.target.value })} required/>
