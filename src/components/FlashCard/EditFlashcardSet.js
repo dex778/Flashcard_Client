@@ -9,7 +9,7 @@ const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
 const headerStyle = { margin: 0 }
 const avatarStyle = { backgroundColor: '#1bbd7e' }
     
-class Flashcards extends React.Component {
+class EditFlashcardSet extends React.Component {
     constructor(props){
         super(props)
         this.state = {
@@ -36,7 +36,8 @@ class Flashcards extends React.Component {
     }
 
     getCardData = () => {
-        fetch('http://localhost:8000/card/flashcard', {
+        const { setId } = this.props.match.params
+        fetch(`http://localhost:8000/set/flashcard/${setId}`, {
             method: 'GET',
             headers: new Headers ({
                 'Content-Type' : 'application/json',
@@ -79,6 +80,7 @@ class Flashcards extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        const { setId } = this.props.match.params
         this.setState({isSubmitting: true});
         const URL = this.state.isEditing ? `http://localhost:8000/card/update/${this.state.currentId}`: 'http://localhost:8000/card/create';
         const method = this.state.isEditing ? 'PUT' : 'POST'
@@ -87,7 +89,8 @@ class Flashcards extends React.Component {
         method: method,
         body: JSON.stringify({ 
             word: this.state.word, 
-            definition: this.state.definition,   
+            definition: this.state.definition,
+            setId: setId   
         }),
         headers: new Headers ({
             'Content-Type' : 'application/json',
@@ -126,7 +129,7 @@ class Flashcards extends React.Component {
                     <Avatar style={avatarStyle}>
                         <QueueIcon />
                     </Avatar>
-                    <h2 style={headerStyle}>Create Flashcard</h2>
+                    <h2 style={headerStyle}>Add Flashcard to set</h2>
                 </Grid>
                     <br />
                 <form onSubmit={this.handleSubmit} noValidate>
@@ -139,10 +142,10 @@ class Flashcards extends React.Component {
                     <Button type='submit' variant='contained' color='primary' disabled={this.state.isSubmitting}>{this.state.isEditing ? 'Update': 'Create'}</Button>
                 </form>
             </Paper>
-            <div style={{ display:"flex"}}>
+            <div style={{ display:"flex" }} >
                 {this.state.cards.map((card) => {
                     return(
-                        <div >
+                        <div key={card.id}>
                         {/* <Button variant='contained' color='primary' onClick={() => this.setEdit(card)} >{`edit ${card.word}`}</Button>
                         <Button variant='contained' color='danger' onClick={() => this.deleteCardData(card.id)} >{`delete ${card.word}`}</Button> */}
                         <CreateFlashcard data={card} onEdit={this.setEdit} onDelete={this.deleteCardData} />
@@ -225,7 +228,7 @@ class Flashcards extends React.Component {
 //     )
 // }
 
-export default Flashcards;
+export default EditFlashcardSet;
 
 
 
