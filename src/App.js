@@ -3,17 +3,13 @@ import React from 'react';
 import './App.css';
 import Authorization from '../src/components/LandingPage/Authorization';
 import Navigation from '../src/components/LandingPage/Navigation'
-import Flashcards from './components/FlashCard/Flashcards';
-import FlashcardSet from './components/FlashCard/FlashcardSet';
-// import Footer from '../src/components/LandingPage/Footer';
+import Flashcards from './components/FlashCard/Flashcards/Flashcards';
+import FlashcardSet from './components/FlashCard/FlashcardSet/FlashcardSet';
 import Home from '../src/components/LandingPage/Home'
-// import Login from '../src/Login';
-// import SignUp from '../src/SignUp';
-
-// import LandingPage from './Home';
 import{ BrowserRouter as Router, Route } from 'react-router-dom'
-import CreateFlashcard from './components/FlashCard/CreateFlashcard';
-import EditFlashcardSet from './components/FlashCard/EditFlashcardSet';
+import CreateFlashcard from './components/FlashCard/Flashcards/CreateFlashcard';
+import EditFlashcardSet from './components/FlashCard/FlashcardSet/EditFlashcardSet';
+// import EditFlashcard from './components/FlashCard/EditFlashcard';
 
 class App extends React.Component {
   constructor(props) {
@@ -68,6 +64,9 @@ class App extends React.Component {
 
                 {<Route  path='/flashcardset/:setId' render={(props) => (<EditFlashcardSet {...props} sessionToken={this.state.sessionToken} />
               )}/>}
+
+                {/* {<Route  path='/flashcardset/:setId' render={(props) => (<EditFlashcardSet {...props} sessionToken={this.state.sessionToken} />
+              )}/>} */}
               
             </>
           ) : <Authorization updateToken={this.updateToken} />}
