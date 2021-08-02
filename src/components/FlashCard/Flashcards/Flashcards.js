@@ -1,8 +1,8 @@
 import React from 'react';
-import './Flashcards.css';
+// import './Flashcards.css';
 import { Grid, Paper, Avatar, Button, TextField } from '@material-ui/core'
 import QueueIcon from '@material-ui/icons/Queue';
-import CreateFlashcard from './CreateFlashcard';
+import CreateFlashcard from '../Flashcards/CreateFlashcard';
 
 
 const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
@@ -79,7 +79,7 @@ class Flashcards extends React.Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.setState({isSubmitting: true});
+        this.setState({ isSubmitting: true });
         const URL = this.state.isEditing ? `http://localhost:8000/card/update/${this.state.currentId}`: 'http://localhost:8000/card/create';
         const method = this.state.isEditing ? 'PUT' : 'POST'
 
@@ -112,7 +112,8 @@ class Flashcards extends React.Component {
         console.log(err, 'Flashcard Not Created')
     })
     .finally(() => {
-        this.setState({isSubmitting: false});
+        this.setState({ isSubmitting: false });
+        console.log('this is firing')
 
     })
 
@@ -143,13 +144,8 @@ class Flashcards extends React.Component {
                 {this.state.cards.map((card) => {
                     return(
                         <div >
-                        {/* <Button variant='contained' color='primary' onClick={() => this.setEdit(card)} >{`edit ${card.word}`}</Button>
-                        <Button variant='contained' color='danger' onClick={() => this.deleteCardData(card.id)} >{`delete ${card.word}`}</Button> */}
-                        <CreateFlashcard data={card} onEdit={this.setEdit} onDelete={this.deleteCardData} />
-
-
+                            <CreateFlashcard data={card} onEdit={this.setEdit} onDelete={this.deleteCardData} />
                         </div>
-
                     )
                 } )}
             </div>
@@ -158,6 +154,26 @@ class Flashcards extends React.Component {
         )
     }
 }
+
+
+
+
+
+
+export default Flashcards;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -224,8 +240,3 @@ class Flashcards extends React.Component {
         
 //     )
 // }
-
-export default Flashcards;
-
-
-
