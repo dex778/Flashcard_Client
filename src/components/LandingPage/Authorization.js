@@ -3,21 +3,68 @@ import {Container, Row, Col} from 'reactstrap';
 import Login from '../LandingPage/Login'
 import SignUp from '../LandingPage/SignUp'
 
-const Authorization = (props) => {
 
 
-    return ( 
-        <Container className="auth-container">
+class Authorization extends React.Component {
+    
+
+    render(){
+        return (
+            <Container className="auth-container">
             <Row>
                 <Col md="6">
-                    <SignUp updateToken={props.updateToken}/>
+                    <SignUp updateToken={this.props.updateToken}/>
                 </Col>
                 <Col md="6" className="login-col">
-                    <Login updateToken={props.updateToken}/>
+                    <Login updateToken={this.props.updateToken}/>
                 </Col>
             </Row>
         </Container>
-     );
+        )
+    }
 }
+
  
-export default Authorization;
+export default Authorization
+
+
+
+
+
+
+
+
+
+
+
+
+// class  extends React.Component {
+//     constructor(props){
+//         super(props)
+    
+//     }
+
+//     reder(){
+//         return (
+            
+//         )
+//     }
+// }
+
+
+// const Authorization = (props) => {
+
+
+//     return ( 
+//         <Container className="auth-container">
+//             <Row>
+//                 <Col md="6">
+//                     <SignUp updateToken={props.updateToken}/>
+//                 </Col>
+//                 <Col md="6" className="login-col">
+//                     <Login updateToken={props.updateToken}/>
+//                 </Col>
+//             </Row>
+//         </Container>
+//      );
+// }
