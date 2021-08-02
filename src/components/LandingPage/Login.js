@@ -50,7 +50,7 @@ class Login extends React.Component {
 
                 <form onSubmit={this.handleSubmit}>
                 <TextField label='Username' placeholder='Enter username' fullWidth  value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })} />
-                <TextField label='Password' placeholder='Enter password' type='password' fullWidth  value={this.state.username} onChange={(e) => this.setState({ password: e.target.value })} />
+                <TextField label='Password' placeholder='Enter password' type='password' fullWidth  value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })} />
                 <br />
                 <br />
                 <br />
