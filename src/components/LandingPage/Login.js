@@ -1,11 +1,14 @@
 
-import React, { useState, useEffect }from 'react';
+import React from 'react';
 
 import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
-import './Login.css'
 
-/*
+
+const paperStyle={padding: '30px 20px', height: '70vh', width: 480,  margin: "20px auto"};
+const avatarStyle={backgroundColor:"green"};
+const btnstyle={margin:'8px 0'}
+
 class Login extends React.Component {
     constructor(props) {
         super(props)
@@ -14,6 +17,26 @@ class Login extends React.Component {
             password: ""
         }
     }
+         handleSubmit = (event) => {
+        event.preventDefault();
+        fetch(`http://localhost:8000/login`, {
+            method: 'POST',
+            body:JSON.stringify({
+                    username: this.state.username,
+                    password: this.state.password
+                }),
+            headers: new Headers({
+                'Content-Type': 'application/json'
+            })
+        }).then(
+            (response) => response.json()
+        ).then((data) => {
+            console.log(data)
+            this.props.updateToken(data.sessionToken)
+        })
+        // console.log(username, password);
+    }
+
 
     render() {
         return (
@@ -25,9 +48,9 @@ class Login extends React.Component {
                     <h2>Sign-in</h2>
                 </Grid >
 
-                <form onSubmit={handleSubmit}>
-                <TextField label='Username' placeholder='Enter username' fullWidth  onChange={(e) => setUserName(e.target.value)} name="username" value={username} />
-                <TextField label='Password' placeholder='Enter password' type='password' fullWidth  onChange={(e) => setPassword(e.target.value)} name="password" value={password} />
+                <form onSubmit={this.handleSubmit}>
+                <TextField label='Username' placeholder='Enter username' fullWidth  value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })} />
+                <TextField label='Password' placeholder='Enter password' type='password' fullWidth  value={this.state.username} onChange={(e) => this.setState({ password: e.target.value })} />
                 <br />
                 <br />
                 <br />
@@ -51,12 +74,17 @@ class Login extends React.Component {
 
         </div> 
     )
-        )
+        
     }
 }
 
-*/
 
+
+
+export default Login;
+
+
+/*
 
 const Login = (props) => {
 
@@ -126,4 +154,5 @@ const Login = (props) => {
     )
 }
 
-export default Login;
+
+*/
