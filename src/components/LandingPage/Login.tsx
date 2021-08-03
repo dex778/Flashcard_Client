@@ -1,6 +1,5 @@
 
 import React from 'react';
-
 import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
 import APIURL from '../lib/environment';
@@ -19,6 +18,8 @@ interface initialState {
     password: string
 }
 
+/*this will reach the login endpoint */
+
 class Login extends React.Component<customProps, initialState> {
     constructor(props: customProps) {
         super(props)
@@ -27,6 +28,8 @@ class Login extends React.Component<customProps, initialState> {
             password: ""
         }
     }
+
+
          handleSubmit = (event: any) => {
         event.preventDefault();
         fetch(`${APIURL}/login`, {
@@ -49,6 +52,7 @@ class Login extends React.Component<customProps, initialState> {
 
 
     render() {
+        
         return (
             <div>
         <Grid>

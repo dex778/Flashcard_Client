@@ -40,6 +40,9 @@ interface initialState {
 
 }
 
+/*this is where the logic is held to create the flashcard set upon click of the create button, this also holds the buttons to update and delete the flashcards sets */
+
+
 
 class CreateFlashcard extends React.Component<customProps, initialState> {
   constructor(props: customProps) {

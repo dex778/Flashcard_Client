@@ -6,6 +6,7 @@ import CreateFlashcard from './CreateFlashcard';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 import APIURL from '../../lib/environment';
 
+/*this is where the logic is held to be able to edit the flashcards. */
 
 const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
 const headerStyle = { margin: 0 }
