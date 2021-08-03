@@ -13,18 +13,15 @@ class Home extends React.Component {
             <div className='container'>
             <h1>Welcome to Study JavaScript</h1>
         <div className='flex-container'>
-        <Button style={{ margin:'5px'}} type='button' variant="contained" color="primary" onClick={(e) => {e.preventDefault(); window.location.href=`${APIURL}/flashcards`;}}>Flashcard</Button>
-        <br />
-        <br />
         <Link to="/flashcards">
-     <  button type="button">
-          Click Me!
-         </button>
+        <Button style={{ margin:'5px'}} type='button' variant="contained" color="primary" >Flashcard</Button>
         </Link>
         <br />
         <br />
 
-        <Button style={{ margin:'5px'}} type='button' variant="contained" color="secondary" onClick={(e) => {e.preventDefault(); window.location.href=`${APIURL}/flashcardset`;}}>FlashcardSet</Button>
+        <Link to="/flashcardset">
+        <Button style={{ margin:'5px'}} type='button' variant="contained" color="primary" >Flashcard Set</Button>
+        </Link>
         </div>
         </div>
         )
