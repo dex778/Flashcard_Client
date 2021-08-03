@@ -138,7 +138,7 @@ class Flashcards extends React.Component<customProps, initialState> {
         return (
             <Grid>
             <Paper elevation={20} style={paperStyle}>
-                <Grid>
+                <Grid >
                     <Avatar style={avatarStyle}>
                         <QueueIcon />
                     </Avatar>
