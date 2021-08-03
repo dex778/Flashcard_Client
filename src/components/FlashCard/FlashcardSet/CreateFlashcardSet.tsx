@@ -2,13 +2,46 @@ import React from 'react';
 import ReactCardFlip from 'react-card-flip';
 
 // Index Card Styling
-const frontCard = { backgroundColor: '#3CAEA3', height: '300px', width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white', textAlign: 'center', borderRadius: '20px', margin: '10px' }
-const backCard = { backgroundColor: '#3CAEA3', height: '300px', width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white', textAlign: 'center', borderRadius: '20px', margin: '10px' }
+const frontCard = { 
+  backgroundColor: '#3CAEA3', 
+  height: '300px',
+   width: '300px', 
+   display: 'flex', 
+   justifyContent: 'center', 
+   alignItems: 'center', 
+   color: 'white', 
+   borderRadius: '20px', 
+   margin: '10px'
+   }
+
+const backCard = { 
+  backgroundColor: '#3CAEA3', 
+  height: '300px', 
+  width: '300px', 
+  display: 'flex',
+  justifyContent: 'center', 
+  alignItems: 'center',
+  color: 'white', 
+  borderRadius: '20px',
+  margin: '10px' }
+
+interface customProps {
+  data:any
+  onEdit(data: any): any
+  onDelete(id:string): any
+}
+
+interface initialState {
+
+  data:any
+  isFlipped: boolean
 
 
+}
 
-class CreateFlashcard extends React.Component {
-  constructor(props) {
+
+class CreateFlashcard extends React.Component<customProps, initialState> {
+  constructor(props: customProps) {
     super(props);
     this.state = {
       isFlipped: false,
@@ -17,10 +50,14 @@ class CreateFlashcard extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
+  handleClick(e: any ) {
     e.preventDefault();
     this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
+
+
   }
+
+
 
   render() {
     return (
@@ -33,7 +70,7 @@ class CreateFlashcard extends React.Component {
           
           
           <div style={{ display: 'flex', margin: '10px'}}>
-            <button style={{ margin:'5px'}} onClick={this.handleClick}>Flip</button>
+            <button style={{ margin:'5px'}} onClick={(e) => {e.preventDefault(); window.location.href=`http://localhost:3000/flashcardset/${this.state.data.id}`;}}>Card Set</button>
             <button style={{ margin:'5px'}} onClick={() => this.props.onEdit(this.state.data)}>Edit</button>
             <button style={{ margin:'5px'}} onClick={() => this.props.onDelete(this.state.data.id)}>Delete</button>
           </div>

@@ -1,16 +1,35 @@
 import React from 'react';
-import './Flashcards.css';
+
 import { Grid, Paper, Avatar, Button, TextField } from '@material-ui/core'
 import QueueIcon from '@material-ui/icons/Queue';
-import CreateFlashcard from '../Flashcards/CreateFlashcard';
+import CreateFlashcardSet from './CreateFlashcardSet';
+import { RouteComponentProps, withRouter } from 'react-router';
+import APIURL from '../../lib/environment';
 
 
 const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
 const headerStyle = { margin: 0 }
 const avatarStyle = { backgroundColor: '#1bbd7e' }
-    
-class EditFlashcard extends React.Component {
-    constructor(props){
+   
+interface Params {
+    setId: string
+}
+
+interface customProps extends RouteComponentProps<Params> {
+    sessionToken: string
+}
+
+interface initialState {
+    word: string
+    definition: string
+    isSubmitting: boolean
+    isEditing: boolean
+    currentId: number
+    cards: any[]
+}
+
+class EditFlashcardSet extends React.Component<customProps, initialState> {
+    constructor(props: customProps){
         super(props)
         this.state = {
             word: '',
@@ -26,18 +45,18 @@ class EditFlashcard extends React.Component {
        this.getCardData()
       }
 
-    setEdit = (card) => {
+    setEdit = (card: any) => {
         this.setState({
             isEditing: true,
             currentId: card.id,
             word: card.word,
-            definition: card.definition
+            definition:card.definition
         })
     }
 
     getCardData = () => {
         const { setId } = this.props.match.params
-        fetch(`http://localhost:8000/set/flashcard/${setId}`, {
+        fetch(`${APIURL}/set/flashcard/${setId}`, {
             method: 'GET',
             headers: new Headers ({
                 'Content-Type' : 'application/json',
@@ -54,12 +73,12 @@ class EditFlashcard extends React.Component {
     
             })
         .catch((err) => {
-            console.log(err, 'Flashcard Set Not Created')
+            console.log(err, 'Flashcard Not Created')
         })
     }
 
-    deleteCardData = (id) => {
-        fetch(`http://localhost:8000/card/delete/${id}`, {
+    deleteCardData = (id: string) => {
+        fetch(`${APIURL}/set/delete/${id}`, {
             method: 'DELETE',
             headers: new Headers ({
                 'Content-Type' : 'application/json',
@@ -74,22 +93,22 @@ class EditFlashcard extends React.Component {
     
             })
         .catch((err) => {
-            console.log(err, 'Flashcard Not Deleted')
+            console.log(err, 'Flashcard Deleted')
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = (e:any) => {
         e.preventDefault();
         const { setId } = this.props.match.params
         this.setState({isSubmitting: true});
-        const URL = this.state.isEditing ? `http://localhost:8000/card/update/${this.state.currentId}`: 'http://localhost:8000/card/create';
+        const URL = this.state.isEditing ? `${APIURL}/card/update/${this.state.currentId}`: `${APIURL}/card/create`;
         const method = this.state.isEditing ? 'PUT' : 'POST'
 
         fetch(`${URL}`, {
         method: method,
         body: JSON.stringify({ 
             word: this.state.word, 
-            definition: this.state.definition,
+            definition: this.state.definition, 
             setId: setId   
         }),
         headers: new Headers ({
@@ -103,7 +122,7 @@ class EditFlashcard extends React.Component {
         console.log(data)
         this.setState({
             word: '',
-            definition: '',
+            definition:'',
             isEditing: false,
             currentId: 0
         });
@@ -125,7 +144,7 @@ class EditFlashcard extends React.Component {
         return (
             <Grid>
             <Paper elevation={20} style={paperStyle}>
-                <Grid align='center'>
+                <Grid alignContent='center'>
                     <Avatar style={avatarStyle}>
                         <QueueIcon />
                     </Avatar>
@@ -147,7 +166,7 @@ class EditFlashcard extends React.Component {
                     return(
                         <div key={card.id}>
                         
-                             <CreateFlashcard data={card} onEdit={this.setEdit} onDelete={this.deleteCardData} />
+                             <CreateFlashcardSet data={card} onEdit={this.setEdit} onDelete={this.deleteCardData} />
 
 
                         </div>
@@ -163,11 +182,7 @@ class EditFlashcard extends React.Component {
 
 
 
-
-
-
-export default EditFlashcard;
-
+export default withRouter(EditFlashcardSet);
 
 
 
@@ -181,65 +196,68 @@ export default EditFlashcard;
 
 
 
-// const Flashcards = (props) => {
-//     const [word, setWord] = useState('')
-//     const [definition, setDefinition] = useState('')
 
-//     const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
-//     const headerStyle = { margin: 0 }
-//     const avatarStyle = { backgroundColor: '#1bbd7e' }
 
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-//         fetch(`http://localhost:8000/card/create`, {
-//         method: 'POST',
-//         body: JSON.stringify({ 
-//             word: word, 
-//             definition: definition, 
+
+// // const Flashcards = (props) => {
+// //     const [word, setWord] = useState('')
+// //     const [definition, setDefinition] = useState('')
+
+// //     const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
+// //     const headerStyle = { margin: 0 }
+// //     const avatarStyle = { backgroundColor: '#1bbd7e' }
+
+// //     const handleSubmit = (e) => {
+// //         e.preventDefault();
+// //         fetch(`http://localhost:8000/card/create`, {
+// //         method: 'POST',
+// //         body: JSON.stringify({ 
+// //             word: word, 
+// //             definition: definition, 
            
-//         }),
-//         headers: new Headers ({
-//             'Content-Type' : 'application/json',
-//             'Authorization' : props.sessionToken,
-//             'Access-Control-Allow-Origin': '*'   
-//         }),
+// //         }),
+// //         headers: new Headers ({
+// //             'Content-Type' : 'application/json',
+// //             'Authorization' : props.sessionToken,
+// //             'Access-Control-Allow-Origin': '*'   
+// //         }),
         
-//     })
-//     .then((response) => response.json())
-//     .then(data => {
-//         console.log(data)
-//         setWord('');
-//         setDefinition('');
-//         // props.fetchRecipes();
-//         })
-//     .catch((err) => {
-//         console.log(err, 'Flashcard Not Created')
-//     })
-//     }
+// //     })
+// //     .then((response) => response.json())
+// //     .then(data => {
+// //         console.log(data)
+// //         setWord('');
+// //         setDefinition('');
+// //         // props.fetchRecipes();
+// //         })
+// //     .catch((err) => {
+// //         console.log(err, 'Flashcard Not Created')
+// //     })
+// //     }
 
-//     return (
-//         <Grid>
-//             <Paper elevation={20} style={paperStyle}>
-//                 <Grid align='center'>
-//                     <Avatar style={avatarStyle}>
-//                         <QueueIcon />
-//                     </Avatar>
-//                     <h2 style={headerStyle}>Create Flashcard</h2>
-//                 </Grid>
-//                     <br />
-//                 <form onSubmit={handleSubmit} noValidate>
-//                     <TextField fullWidth variant='filled' label='Word' placeholder="Enter your Word" value={word} onChange={(e) => setWord(e.target.value)} required />
-//                     <br />
-//                     <br />
-//                     <TextField fullWidth variant='filled' label='Definition' placeholder="Enter your Definition" value={definition} onChange={(e) => setDefinition(e.target.value)} required/>
+// //     return (
+// //         <Grid>
+// //             <Paper elevation={20} style={paperStyle}>
+// //                 <Grid align='center'>
+// //                     <Avatar style={avatarStyle}>
+// //                         <QueueIcon />
+// //                     </Avatar>
+// //                     <h2 style={headerStyle}>Create Flashcard</h2>
+// //                 </Grid>
+// //                     <br />
+// //                 <form onSubmit={handleSubmit} noValidate>
+// //                     <TextField fullWidth variant='filled' label='Word' placeholder="Enter your Word" value={word} onChange={(e) => setWord(e.target.value)} required />
+// //                     <br />
+// //                     <br />
+// //                     <TextField fullWidth variant='filled' label='Definition' placeholder="Enter your Definition" value={definition} onChange={(e) => setDefinition(e.target.value)} required/>
                     
-//                     <br />
-//                     <br />
-//                     <Button type='submit' variant='contained' color='primary' >Create</Button>
-//                 </form>
-//             </Paper>
-//         </Grid>
+// //                     <br />
+// //                     <br />
+// //                     <Button type='submit' variant='contained' color='primary' >Create</Button>
+// //                 </form>
+// //             </Paper>
+// //         </Grid>
 
         
-//     )
-// }
+// //     )
+// // }

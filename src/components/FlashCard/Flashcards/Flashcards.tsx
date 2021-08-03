@@ -2,15 +2,30 @@ import React from 'react';
 // import './Flashcards.css';
 import { Grid, Paper, Avatar, Button, TextField } from '@material-ui/core'
 import QueueIcon from '@material-ui/icons/Queue';
-import CreateFlashcard from '../Flashcards/CreateFlashcard';
+import CreateFlashcard from './CreateFlashcard';
+import APIURL from '../../lib/environment';
 
 
 const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
 const headerStyle = { margin: 0 }
 const avatarStyle = { backgroundColor: '#1bbd7e' }
-    
-class Flashcards extends React.Component {
-    constructor(props){
+
+interface customProps {
+    sessionToken: string
+}
+
+interface initialState {
+    word: string
+    definition: string
+    isSubmitting: boolean
+    isEditing: boolean
+    currentId: number
+    cards: any[]
+}
+
+
+class Flashcards extends React.Component<customProps, initialState> {
+    constructor(props: customProps){
         super(props)
         this.state = {
             word: '',
@@ -26,7 +41,7 @@ class Flashcards extends React.Component {
        this.getCardData()
       }
 
-    setEdit = (card) => {
+    setEdit = (card: any) => {
         this.setState({
             isEditing: true,
             currentId: card.id,
@@ -36,7 +51,7 @@ class Flashcards extends React.Component {
     }
 
     getCardData = () => {
-        fetch('http://localhost:8000/card/flashcard', {
+        fetch(`${APIURL}/card/flashcard`, {
             method: 'GET',
             headers: new Headers ({
                 'Content-Type' : 'application/json',
@@ -57,8 +72,8 @@ class Flashcards extends React.Component {
         })
     }
 
-    deleteCardData = (id) => {
-        fetch(`http://localhost:8000/card/delete/${id}`, {
+    deleteCardData = (id: string) => {
+        fetch(`${APIURL}/card/delete/${id}`, {
             method: 'DELETE',
             headers: new Headers ({
                 'Content-Type' : 'application/json',
@@ -77,10 +92,10 @@ class Flashcards extends React.Component {
         })
     }
 
-    handleSubmit = (e) => {
+    handleSubmit = (e:any) => {
         e.preventDefault();
         this.setState({ isSubmitting: true });
-        const URL = this.state.isEditing ? `http://localhost:8000/card/update/${this.state.currentId}`: 'http://localhost:8000/card/create';
+        const URL = this.state.isEditing ? `${APIURL}/card/update/${this.state.currentId}`: `${APIURL}/card/create`;
         const method = this.state.isEditing ? 'PUT' : 'POST'
 
         fetch(`${URL}`, {
@@ -123,7 +138,7 @@ class Flashcards extends React.Component {
         return (
             <Grid>
             <Paper elevation={20} style={paperStyle}>
-                <Grid align='center'>
+                <Grid alignContent='center'>
                     <Avatar style={avatarStyle}>
                         <QueueIcon />
                     </Avatar>
