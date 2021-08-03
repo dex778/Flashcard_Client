@@ -3,6 +3,7 @@ import Button  from '@material-ui/core/Button';
 import './Home.css'
 import HOMEURL from '../lib/routing';
 import APIURL from '../lib/environment';
+import { Link } from 'react-router-dom';
 
 class Home extends React.Component {
     
@@ -15,6 +16,11 @@ class Home extends React.Component {
         <Button style={{ margin:'5px'}} type='button' variant="contained" color="primary" onClick={(e) => {e.preventDefault(); window.location.href=`${APIURL}/flashcards`;}}>Flashcard</Button>
         <br />
         <br />
+        <Link to="/flashcards">
+     <  button type="button">
+          Click Me!
+         </button>
+        </Link>
         <br />
         <br />
 
