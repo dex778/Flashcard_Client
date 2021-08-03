@@ -53,7 +53,7 @@ class Login extends React.Component<customProps, initialState> {
             <div>
         <Grid>
             <Paper elevation={10} style={paperStyle}>
-                <Grid alignContent="center">
+                <Grid >
                     <Avatar style={avatarStyle}><HomeIcon/></Avatar>
                     <h2>Sign-in</h2>
                 </Grid >
