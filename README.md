@@ -1,70 +1,36 @@
-# Getting Started with Create React App
+App Features
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Users :
+Create a user account
+Login with user account
 
-## Available Scripts
+User Features:
 
-In the project directory, you can run:
+The user can create individual flashcards
+The user can flip the flashcard upon click of a button
+Each flashcard can be updated and deleted
 
-### `yarn start`
+The user can create  flashcard sets
+Each flashcard set can be updated and deleted. When user deletes a set, it deletes all flashcards within
+The use can then enter into flashcard set and create flashcards within that set.
+Flashcards within set can be updated and deleted.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Flashcard App Summary Front End
 
-### `yarn test`
+Sign-in, Sign- up and Browsing
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+-The app is divided into pages that have url endpoints. It uses react-router-dom to be able to browse through the pages. There is the sign-up, sign-in, the home page where you can choose to take you to the next page which is either to your create cards or create a set of flashcards. 
 
-### `yarn build`
+-The user can  sign up at the home page. The sign-up process requires an email and password which needs to be confirmed by user. Upon sign-up, the user is stored in the database and then a token is created that is used to authenticate and is unique to the user. Once signed in the user token remains until logout. Upon sign-in, the user will be directed to the dashboard where user interaction begins with the app and the user can begin creating flashcards by clicking ‘create’.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+The sign-in process compares users that have previously sign-up. All this process takes place on the server side. It is all encrypted through bcryptjs. The session is checked through the validateSession portion of the backend.  Upon sign-in, the user is taken to the dashboard where he begins navigating the app.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The Cards:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Once the user reaches the cards, he sees the display to be able to create flash cards. The displays takes two inputs. One for word and the other for definition. Once the user fills the information, he can create the cards upon click of create button. The cards are then shown and they are able to flip between word and definition. The user also has the option to update or delete the cards. The update brings up values within the ‘Create Flashcard Display’ for editing of the card in real time.  All the changes of inputs are done through the user create, update, flashcard endpoints on the backend.
 
-### `yarn eject`
+The user also has the option to create card decks. Most of the layout for this part is similar to the regular cards except that now you can create card decks with name and inside the deck, you can create your cards. Those cards will be called by the set endpoints where you can recall all the cards in your deckName by Id. 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+   
