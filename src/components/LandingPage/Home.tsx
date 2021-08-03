@@ -1,7 +1,7 @@
 import React from 'react';
 import Button  from '@material-ui/core/Button';
 import './Home.css'
-import APIURL from '../lib/environment';
+import HOMEURL from '../lib/routing';
 
 class Home extends React.Component {
     
@@ -11,13 +11,13 @@ class Home extends React.Component {
             <div className='container'>
             <h1>Welcome to Study JavaScript</h1>
         <div className='flex-container'>
-        <Button style={{ margin:'5px'}} type='button' variant="contained" color="primary" onClick={(e) => {e.preventDefault(); window.location.href=`${APIURL}/flashcards`;}}>Flashcard</Button>
+        <Button style={{ margin:'5px'}} type='button' variant="contained" color="primary" onClick={(e) => {e.preventDefault(); window.location.href=`${HOMEURL}/flashcards`;}}>Flashcard</Button>
         <br />
         <br />
         <br />
         <br />
 
-        <Button style={{ margin:'5px'}} type='button' variant="contained" color="secondary" onClick={(e) => {e.preventDefault(); window.location.href=`${APIURL}/flashcardset`;}}>FlashcardSet</Button>
+        <Button style={{ margin:'5px'}} type='button' variant="contained" color="secondary" onClick={(e) => {e.preventDefault(); window.location.href=`${HOMEURL}/flashcardset`;}}>FlashcardSet</Button>
         </div>
         </div>
         )

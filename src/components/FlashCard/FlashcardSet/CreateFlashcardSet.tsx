@@ -66,6 +66,8 @@ class CreateFlashcard extends React.Component<customProps, initialState> {
         <div style={frontCard}>
           <div style={{ margin: '10px', display: 'flex'}}>
             {this.state.data.deckName}
+            {this.state.data.word}
+
           </div>
           
           
@@ -81,7 +83,7 @@ class CreateFlashcard extends React.Component<customProps, initialState> {
 
           <div>
             <button style={{ margin:'5px', }} onClick={this.handleClick}>Flip</button>
-            {/* {this.state.data.definition} */}
+            {this.state.data.definition}
           </div>
 
         </div>

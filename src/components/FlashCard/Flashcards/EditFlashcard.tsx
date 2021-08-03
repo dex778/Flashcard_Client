@@ -48,10 +48,11 @@ class EditFlashcard extends React.Component<customProps, initialState> {
 
     setEdit = (card: any) => {
         this.setState({
-            isEditing: true,
-            currentId: card.id,
             word: card.word,
-            definition: card.definition
+            definition: card.definition,
+            isEditing: true,
+            currentId: card.id
+            
         })
     }
 
@@ -105,7 +106,7 @@ class EditFlashcard extends React.Component<customProps, initialState> {
         const URL = this.state.isEditing ? `${APIURL}/card/update/${this.state.currentId}`: `${APIURL}/card/create`;
         const method = this.state.isEditing ? 'PUT' : 'POST'
 
-        fetch(`${URL}`, {
+        fetch( URL, {
         method: method,
         body: JSON.stringify({ 
             word: this.state.word, 
@@ -165,7 +166,7 @@ class EditFlashcard extends React.Component<customProps, initialState> {
             <div style={{ display:"flex" }} >
                 {this.state.cards.map((card) => {
                     return(
-                        <div key={card.id}>
+                        <div key={card}>
                         
                              <CreateFlashcard data={card} onEdit={this.setEdit} onDelete={this.deleteCardData} />
 

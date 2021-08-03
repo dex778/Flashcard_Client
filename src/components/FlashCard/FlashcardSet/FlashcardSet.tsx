@@ -27,7 +27,7 @@ interface Params {
 
   }
 
-class FlashcardSet extends React.Component <customProps, initialState, Params>{
+class FlashcardSet extends React.Component<customProps, initialState, Params>{
     constructor(props: customProps){
         super(props)
         this.state = {
@@ -40,7 +40,7 @@ class FlashcardSet extends React.Component <customProps, initialState, Params>{
 }
 
         componentDidMount() {
-            this.getCardSetData()
+            this.getCardData()
         }
 
         setEdit = (card: any) => {
@@ -51,7 +51,7 @@ class FlashcardSet extends React.Component <customProps, initialState, Params>{
             })
         }
 
-        getCardSetData = () => {
+        getCardData = () => {
             fetch(`${APIURL}/set/flashcard/`, {
                 method: 'GET',
                 headers: new Headers ({
@@ -73,7 +73,7 @@ class FlashcardSet extends React.Component <customProps, initialState, Params>{
             })
         }
 
-        deleteCardSetData = (id: string) => {
+        deleteCardData = (id: string) => {
             fetch(`${APIURL}/set/delete/${id}`, {
                 method: 'DELETE',
                 headers: new Headers ({
@@ -85,7 +85,7 @@ class FlashcardSet extends React.Component <customProps, initialState, Params>{
             .then((response) => response.json())
             .then(data => {
                 console.log(data)
-                this.getCardSetData();
+                this.getCardData();
         
                 })
             .catch((err) => {
@@ -96,11 +96,11 @@ class FlashcardSet extends React.Component <customProps, initialState, Params>{
         handleSubmit = (e:any) => {
             e.preventDefault();
             this.setState({ isSubmitting: true });
-            const URL = this.state.isEditing ? `${APIURL}/${this.state.currentId}`: `${APIURL}/set/create`;
+            const URL = this.state.isEditing ? `${APIURL}/set/update/${this.state.currentId}`: `${APIURL}/set/create`;
             const method = this.state.isEditing ? 'PUT' : 'POST'
 
 
-            fetch(URL, {
+            fetch( URL, {
             method: method,
             body: JSON.stringify({ 
                 deckName: this.state.deckName 
@@ -120,7 +120,7 @@ class FlashcardSet extends React.Component <customProps, initialState, Params>{
                 currentId: 0
             })
 
-                this.getCardSetData();
+                this.getCardData();
 
             })
         .catch((err) => {
@@ -157,7 +157,7 @@ class FlashcardSet extends React.Component <customProps, initialState, Params>{
                 {this.state.cards.map((card: any) => {
                     return(
                         <div >
-                            <CreateFlashcardSet data={card} onEdit={this.setEdit} onDelete={this.deleteCardSetData} />
+                            <CreateFlashcardSet data={card} onEdit={this.setEdit} onDelete={this.deleteCardData} />
                         </div>
                     )
                 } )}

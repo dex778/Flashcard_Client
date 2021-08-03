@@ -79,7 +79,7 @@ class EditFlashcardSet extends React.Component<customProps, initialState> {
     }
 
     deleteCardData = (id: string) => {
-        fetch(`${APIURL}/set/delete/${id}`, {
+        fetch(`${APIURL}/card/delete/${id}`, {
             method: 'DELETE',
             headers: new Headers ({
                 'Content-Type' : 'application/json',
@@ -105,7 +105,7 @@ class EditFlashcardSet extends React.Component<customProps, initialState> {
         const URL = this.state.isEditing ? `${APIURL}/card/update/${this.state.currentId}`: `${APIURL}/card/create`;
         const method = this.state.isEditing ? 'PUT' : 'POST'
 
-        fetch(`${URL}`, {
+        fetch(URL, {
         method: method,
         body: JSON.stringify({ 
             word: this.state.word, 
