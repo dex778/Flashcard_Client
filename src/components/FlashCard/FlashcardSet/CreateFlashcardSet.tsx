@@ -7,12 +7,12 @@ const frontCard = {
   backgroundColor: '#3CAEA3', 
   height: '300px',
    width: '300px', 
-   display: 'flex', 
+   display: 'flex-container', 
    justifyContent: 'center', 
    alignItems: 'center', 
    color: 'white', 
    borderRadius: '20px', 
-   margin: '10px'
+   margin: '30px'
    }
 
 const backCard = { 
@@ -68,14 +68,14 @@ class CreateFlashcard extends React.Component<customProps, initialState> {
       <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="vertical">
 
         <div style={frontCard}>
-          <div style={{ margin: '10px', display: 'flex'}}>
+          <div style={{ padding: '40px', display: 'flex-wrap', textAlign: "center"}}>
             {this.state.data.deckName}
             {this.state.data.word}
 
           </div>
           
           
-          <div style={{ display: 'flex', margin: '10px'}}>
+          <div style={{ display: 'flex', margin: '10px', justifyContent:"center"}}>
 
             <Link to={`/flashcardset/${this.state.data.id}`}>
             <button style={{ margin:'5px'}} type='button'  > Set</button>
