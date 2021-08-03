@@ -5,6 +5,9 @@ import QueueIcon from '@material-ui/icons/Queue';
 import CreateFlashcardSet from './CreateFlashcardSet';
 import APIURL from '../../lib/environment';
 
+/*this is where the user can create flashcard set names. With update and delete logic included  */
+
+
 const paperStyle = { padding: '30px 20px', height:'30vh', width: 480, margin: "20px auto" }
 const headerStyle = { margin: 0 }
 const avatarStyle = { backgroundColor: '#1bbd7e' }
@@ -26,6 +29,8 @@ interface Params {
     id: string;
 
   }
+
+
 
 class FlashcardSet extends React.Component<customProps, initialState, Params>{
     constructor(props: customProps){

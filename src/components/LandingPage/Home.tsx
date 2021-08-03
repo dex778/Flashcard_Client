@@ -1,9 +1,10 @@
 import React from 'react';
 import Button  from '@material-ui/core/Button';
 import './Home.css'
-import HOMEURL from '../lib/routing';
-import APIURL from '../lib/environment';
 import { Link } from 'react-router-dom';
+
+
+    //this is the Home page where the user can chose where to go next.
 
 class Home extends React.Component {
     

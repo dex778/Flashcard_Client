@@ -6,12 +6,13 @@ import CreateFlashcardSet from './CreateFlashcardSet';
 import { RouteComponentProps, withRouter } from 'react-router';
 import APIURL from '../../lib/environment';
 
+/*this is where the logic is held to be able to edit the flashcard set. */
 
 
 const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
 const headerStyle = { margin: 0 }
 const avatarStyle = { backgroundColor: '#1bbd7e' }
-   
+
 interface Params {
     setId: string
 }
@@ -28,6 +29,8 @@ interface initialState {
     currentId: number
     cards: any[]
 }
+
+
 
 class EditFlashcardSet extends React.Component<customProps, initialState> {
     constructor(props: customProps){

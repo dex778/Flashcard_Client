@@ -27,6 +27,9 @@ class Signup extends React.Component<customProps, initialState> {
             password: ''
         }
     }
+
+    //this will reach the register endpoint
+    
             handleSubmit = (e: any) => {
                 e.preventDefault();
                 console.log(this.state.username, this.state.password);

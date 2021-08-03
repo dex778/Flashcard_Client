@@ -5,6 +5,8 @@ import QueueIcon from '@material-ui/icons/Queue';
 import CreateFlashcard from './CreateFlashcard';
 import APIURL from '../../lib/environment';
 
+/*this is where the user can create individual flashcards, with update and delete logic included  */
+
 
 const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
 const headerStyle = { margin: 0 }
@@ -51,7 +53,7 @@ class Flashcards extends React.Component<customProps, initialState> {
     }
 
     getCardData = () => {
-        fetch(`${APIURL}/card/flashcard`, {
+        fetch(`${APIURL}/card/flashcard`, { // this will fetch the flashcard and info
             method: 'GET',
             headers: new Headers ({
                 'Content-Type' : 'application/json',
@@ -72,7 +74,7 @@ class Flashcards extends React.Component<customProps, initialState> {
         })
     }
 
-    deleteCardData = (id: string) => {
+    deleteCardData = (id: string) => { //delete flashcard logic
         fetch(`${APIURL}/card/delete/${id}`, {
             method: 'DELETE',
             headers: new Headers ({
@@ -92,7 +94,7 @@ class Flashcards extends React.Component<customProps, initialState> {
         })
     }
 
-    handleSubmit = (e:any) => {
+    handleSubmit = (e:any) => { //this holds the data to update or create flashcards.
         e.preventDefault();
         this.setState({ isSubmitting: true });
         const URL = this.state.isEditing ? `${APIURL}/card/update/${this.state.currentId}`: `${APIURL}/card/create`;
@@ -120,7 +122,7 @@ class Flashcards extends React.Component<customProps, initialState> {
             currentId: 0
         });
         this.getCardData();
-        
+
         })
     .catch((err) => {
         console.log(err, 'Flashcard Not Created')

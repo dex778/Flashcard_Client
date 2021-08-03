@@ -7,6 +7,7 @@ interface customProps {
     updateToken(newToken: string): any
 }
 
+/*this takes in the login an register info on hhe landing page */
 
 
 class Authorization extends React.Component<customProps> {
