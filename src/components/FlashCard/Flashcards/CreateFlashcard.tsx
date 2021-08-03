@@ -5,6 +5,7 @@ import ReactCardFlip from 'react-card-flip';
 
 // Index Card Styling
 const frontCard = { backgroundColor: '#3CAEA3', height: '300px', width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white',  borderRadius: '20px', margin: '10px' }
+
 const backCard = { backgroundColor: '#3CAEA3', height: '300px', width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white',  borderRadius: '20px', margin: '10px' }
 
 /*this is where the logic is held to create the flashcard  upon click of the create button, this also holds the buttons to update and delete the flashcards */
@@ -39,8 +40,8 @@ class CreateFlashcard extends React.Component<customProps, initialState> {
   render() {
     return (
       <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="vertical">
-
-        <div style={frontCard}>
+          
+          <div style={frontCard}>
           <div style={{ margin: '10px', display: 'flex'}}>
             {this.state.data.word}
           </div>

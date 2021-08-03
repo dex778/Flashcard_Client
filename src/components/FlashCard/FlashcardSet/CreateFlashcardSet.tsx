@@ -78,9 +78,9 @@ class CreateFlashcard extends React.Component<customProps, initialState> {
           <div style={{ display: 'flex', margin: '10px'}}>
 
             <Link to={`/flashcardset/${this.state.data.id}`}>
-            <button style={{ margin:'5px'}} type='button'  >Flashcard Set</button>
+            <button style={{ margin:'5px'}} type='button'  > Set</button>
           </Link>
-            {/* <button style={{ margin:'5px'}} onClick={(e) => {e.preventDefault(); window.location.href=`http://localhost:3000/flashcardset/`;}}>Card Set</button> */}
+            <button style={{ margin:'5px'}} onClick={this.handleClick}>Flip</button>
             <button style={{ margin:'5px'}} onClick={() => this.props.onEdit(this.state.data)}>Edit</button>
             <button style={{ margin:'5px'}} onClick={() => this.props.onDelete(this.state.data.id)}>Delete</button>
           </div>
