@@ -12,7 +12,7 @@ import EditFlashcardSet from './components/FlashCard/FlashcardSet/EditFlashcardS
 
 // import EditFlashcard from './components/FlashCard/EditFlashcard';
 
-export interface Session {
+ interface Session {
   sessionToken: string
 }
 

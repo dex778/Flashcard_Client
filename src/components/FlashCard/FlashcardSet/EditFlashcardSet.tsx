@@ -7,6 +7,7 @@ import { RouteComponentProps, withRouter } from 'react-router';
 import APIURL from '../../lib/environment';
 
 
+
 const paperStyle = { padding: '30px 20px', width: 480, margin: "20px auto" }
 const headerStyle = { margin: 0 }
 const avatarStyle = { backgroundColor: '#1bbd7e' }
