@@ -4,13 +4,23 @@ import React from 'react';
 import ReactCardFlip from 'react-card-flip';
 
 // Index Card Styling
-const frontCard = { backgroundColor: '#3CAEA3', height: '300px', width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white', textAlign: 'center', borderRadius: '20px', margin: '10px' }
-const backCard = { backgroundColor: '#3CAEA3', height: '300px', width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white', textAlign: 'center', borderRadius: '20px', margin: '10px' }
+const frontCard = { backgroundColor: '#3CAEA3', height: '300px', width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white',  borderRadius: '20px', margin: '10px' }
+const backCard = { backgroundColor: '#3CAEA3', height: '300px', width: '300px', display: 'flex', justifyContent: 'center', alignItems: 'center', color: 'white',  borderRadius: '20px', margin: '10px' }
 // const seconDiv = { borderColor: 'black', borderWidth: '2' }
 
+interface customProps {
+  data:any
+  onEdit(data: any): any
+  onDelete(id:string): any
+}
 
-class CreateFlashcard extends React.Component {
-  constructor(props) {
+interface initialState {
+  data:any
+  isFlipped: boolean
+}
+
+class CreateFlashcard extends React.Component<customProps, initialState> {
+  constructor(props: customProps) {
     super(props);
     this.state = {
       isFlipped: false,
@@ -19,7 +29,7 @@ class CreateFlashcard extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
+  handleClick(e:any) {
     e.preventDefault();
     this.setState(prevState => ({ isFlipped: !prevState.isFlipped }));
   }

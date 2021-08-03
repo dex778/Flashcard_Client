@@ -2,14 +2,13 @@ import React from 'react';
 import * as ReactBootStrap from 'react-bootstrap'
 // import './Navigation.css'
  
+interface customProps {
+  logout(): any
+}
 
-class Navigation extends React.Component {
-  constructor(props) {
-    super(props); 
-    this.state = {
-      
-    }
-  }
+
+class Navigation extends React.Component<customProps> {
+ 
 
 
   render(){

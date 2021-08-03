@@ -1,11 +1,15 @@
 import React from 'react';
 import {Container, Row, Col} from 'reactstrap';
-import Login from '../LandingPage/Login'
-import SignUp from '../LandingPage/SignUp'
+import Login from './Login'
+import SignUp from './SignUp'
+
+interface customProps {
+    updateToken(newToken: string): any
+}
 
 
 
-class Authorization extends React.Component {
+class Authorization extends React.Component<customProps> {
     
 
     render(){

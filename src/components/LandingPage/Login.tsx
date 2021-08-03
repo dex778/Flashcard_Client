@@ -3,23 +3,33 @@ import React from 'react';
 
 import { Grid, Paper, Avatar, TextField, Button, Typography, Link } from '@material-ui/core';
 import HomeIcon from '@material-ui/icons/Home';
+import APIURL from '../lib/environment';
 
 
 const paperStyle={padding: '30px 20px', height: '70vh', width: 480,  margin: "20px auto"};
 const avatarStyle={backgroundColor:"green"};
 const btnstyle={margin:'8px 0'}
 
-class Login extends React.Component {
-    constructor(props) {
+interface customProps {
+    updateToken(newToken: string): any
+}
+
+interface initialState {
+    username: string
+    password: string
+}
+
+class Login extends React.Component<customProps, initialState> {
+    constructor(props: customProps) {
         super(props)
         this.state = {
             username: "",
             password: ""
         }
     }
-         handleSubmit = (event) => {
+         handleSubmit = (event: any) => {
         event.preventDefault();
-        fetch(`http://localhost:8000/login`, {
+        fetch(`${APIURL}/login`, {
             method: 'POST',
             body:JSON.stringify({
                     username: this.state.username,
@@ -43,7 +53,7 @@ class Login extends React.Component {
             <div>
         <Grid>
             <Paper elevation={10} style={paperStyle}>
-                <Grid align="center">
+                <Grid alignContent="center">
                     <Avatar style={avatarStyle}><HomeIcon/></Avatar>
                     <h2>Sign-in</h2>
                 </Grid >

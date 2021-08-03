@@ -2,15 +2,33 @@ import React from 'react';
 
 import { Grid, Paper, Avatar, Button, TextField  } from '@material-ui/core'
 import QueueIcon from '@material-ui/icons/Queue';
-import CreateFlashcardSet from '../FlashcardSet/CreateFlashcardSet';
+import CreateFlashcardSet from './CreateFlashcardSet';
+import APIURL from '../../lib/environment';
 
 const paperStyle = { padding: '30px 20px', height:'30vh', width: 480, margin: "20px auto" }
 const headerStyle = { margin: 0 }
 const avatarStyle = { backgroundColor: '#1bbd7e' }
 
+interface customProps {
+    sessionToken: string
+}
 
-class FlashcardSet extends React.Component{
-    constructor(props){
+interface initialState {
+    deckName: string
+    isSubmitting: boolean
+    isEditing: boolean
+    currentId: number
+    cards: any[]
+
+}
+
+interface Params {
+    id: string;
+
+  }
+
+class FlashcardSet extends React.Component <customProps, initialState, Params>{
+    constructor(props: customProps){
         super(props)
         this.state = {
             deckName: '',
@@ -25,7 +43,7 @@ class FlashcardSet extends React.Component{
             this.getCardSetData()
         }
 
-        setEdit = (card) => {
+        setEdit = (card: any) => {
             this.setState({
                 isEditing: true,
                 currentId: card.id,
@@ -34,7 +52,7 @@ class FlashcardSet extends React.Component{
         }
 
         getCardSetData = () => {
-            fetch('http://localhost:8000/set/flashcard/', {
+            fetch(`${APIURL}/set/flashcard/`, {
                 method: 'GET',
                 headers: new Headers ({
                     'Content-Type' : 'application/json',
@@ -55,8 +73,8 @@ class FlashcardSet extends React.Component{
             })
         }
 
-        deleteCardSetData = (id) => {
-            fetch(`http://localhost:8000/set/delete/${id}`, {
+        deleteCardSetData = (id: string) => {
+            fetch(`${APIURL}/set/delete/${id}`, {
                 method: 'DELETE',
                 headers: new Headers ({
                     'Content-Type' : 'application/json',
@@ -75,10 +93,10 @@ class FlashcardSet extends React.Component{
             })
         }
 
-        handleSubmit = (e) => {
+        handleSubmit = (e:any) => {
             e.preventDefault();
             this.setState({ isSubmitting: true });
-            const URL = this.state.isEditing ? `http://localhost:8000/set/update/${this.state.currentId}`: 'http://localhost:8000/set/create';
+            const URL = this.state.isEditing ? `${APIURL}/${this.state.currentId}`: `${APIURL}/set/create`;
             const method = this.state.isEditing ? 'PUT' : 'POST'
 
 
@@ -120,7 +138,7 @@ class FlashcardSet extends React.Component{
         return(
             <Grid >
             <Paper elevation={20} style={paperStyle}>
-                <Grid align='center'>
+                <Grid alignContent='center'>
                     <Avatar style={avatarStyle}>
                         <QueueIcon />
                     </Avatar>
@@ -136,7 +154,7 @@ class FlashcardSet extends React.Component{
                 </form>
             </Paper>
             <div style={{ display:"flex"}}>
-                {this.state.cards.map((card) => {
+                {this.state.cards.map((card: any) => {
                     return(
                         <div >
                             <CreateFlashcardSet data={card} onEdit={this.setEdit} onDelete={this.deleteCardSetData} />

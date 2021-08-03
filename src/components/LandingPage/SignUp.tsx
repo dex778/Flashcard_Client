@@ -4,24 +4,34 @@ import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOut
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 // var passwordValidator = require('password-validator');
+import APIURL from '../lib/environment'
 
 const paperStyle = { padding: '30px 20px', height:'70vh', width: 480, margin: "20px auto" }
 const headerStyle = { margin: 0 }
 const avatarStyle = { backgroundColor: '#1bbd7e' }
 
-class Signup extends React.Component {
-    constructor(props) {
+interface customProps {
+    updateToken(newToken: string): any
+}
+
+interface initialState {
+    username: string
+    password: string
+}
+
+class Signup extends React.Component<customProps, initialState> {
+    constructor(props: customProps) {
         super(props);
         this.state = {
             username: '',
             password: ''
         }
     }
-            handleSubmit = (e) => {
+            handleSubmit = (e: any) => {
                 e.preventDefault();
                 console.log(this.state.username, this.state.password);
 
-                fetch(`http://localhost:8000/register`, {
+                fetch(`${APIURL}/register`, {
                     method: 'POST',
                     body:JSON.stringify({
                             username: this.state.username, 
@@ -42,7 +52,7 @@ class Signup extends React.Component {
         return (
             <Grid >
             <Paper elevation={20} style={paperStyle} >
-                <Grid align='center'>
+                <Grid alignContent='center'>
                     <Avatar style={avatarStyle}>
                         <AddCircleOutlineOutlinedIcon />
                     </Avatar>
@@ -52,7 +62,7 @@ class Signup extends React.Component {
                 
                 <form onSubmit={this.handleSubmit}>
                     <TextField fullWidth label='Username'  placeholder="Enter your name"  value={this.state.username} onChange={(e) => this.setState({ username: e.target.value })} />
-                    <TextField fullWidth label='Password' pattern=".{8,}" placeholder="Enter password" type='password' value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })}/>
+                    <TextField fullWidth label='Password' placeholder="Enter password" type='password' value={this.state.password} onChange={(e) => this.setState({ password: e.target.value })}/>
                     
                     <FormControlLabel
                         control={<Checkbox name="checkedA" />}
