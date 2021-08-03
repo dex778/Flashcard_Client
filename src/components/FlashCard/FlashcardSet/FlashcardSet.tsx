@@ -100,7 +100,7 @@ class FlashcardSet extends React.Component <customProps, initialState, Params>{
             const method = this.state.isEditing ? 'PUT' : 'POST'
 
 
-            fetch(`${URL}`, {
+            fetch(URL, {
             method: method,
             body: JSON.stringify({ 
                 deckName: this.state.deckName 
