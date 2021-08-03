@@ -1,4 +1,5 @@
 let APIURL = "";
+
 switch (window.location.hostname) {
   case "localhost":
   case "127.0.0.1":
@@ -7,4 +8,5 @@ switch (window.location.hostname) {
 case "flashcardsjavascript.herokuapp.com": 
 APIURL = "https://flashcardsjavascript-api.herokuapp.com"
 }
+
 export default APIURL;
