@@ -4,7 +4,7 @@ switch (window.location.hostname) {
   case "127.0.0.1":
     APIURL = "http://localhost:8000";
     break;
-case "flashcards.herokuapp.com": 
-APIURL = "https://flashcards-api.herokuapp.com"
+case "flashcardsjavascript.herokuapp.com": 
+APIURL = "https://flashcardsjavascript-api.herokuapp.com"
 }
 export default APIURL;
