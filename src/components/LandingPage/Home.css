@@ -1,0 +1,21 @@
+
+.container {
+    /* border: solid black 4px; */
+    padding: 10px;
+ 
+}
+
+.flex-container {
+  display: flex;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+  /* border: solid black 1px; */
+
+
+}
+
+
+h1 {
+    text-align: center;
+}
