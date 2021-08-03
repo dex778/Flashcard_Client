@@ -88,7 +88,7 @@ class Flashcards extends React.Component<customProps, initialState> {
     
             })
         .catch((err) => {
-            console.log(err, 'Flashcard Not Created')
+            console.log(err, 'Flashcard Not Deleted')
         })
     }
 
@@ -119,9 +119,8 @@ class Flashcards extends React.Component<customProps, initialState> {
             isEditing: false,
             currentId: 0
         });
-
         this.getCardData();
-
+        
         })
     .catch((err) => {
         console.log(err, 'Flashcard Not Created')
