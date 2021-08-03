@@ -1,5 +1,6 @@
 Study Javascript with Flashcards
 
+****** Upon "UPDATE", the user has to refresh page to see updated cards. ******
 
 App Features
 
